@@ -1,11 +1,8 @@
 import random
 import pandas as pd
-import os
 import sys
-
-# Add the project root to Python path
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-sys.path.insert(0, project_root)
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 from src.backend.db import engine
 
@@ -29,7 +26,7 @@ def score_meal_plan(meal_df, user_goal):
     return score
 
 
-df = pd.read_sql("SELECT name, calories, protein, carbs, fat FROM foods_nutrients", engine)
+df = pd.read_sql("SELECT name, calories, protein, carbs, fat, max_servings FROM foods", db.engine)
 
 
 def generate_best_plan(df, user_goal, trials=1000, meal_size=5):

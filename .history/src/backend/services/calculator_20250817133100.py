@@ -29,7 +29,7 @@ def score_meal_plan(meal_df, user_goal):
     return score
 
 
-df = pd.read_sql("SELECT name, calories, protein, carbs, fat FROM foods_nutrients", engine)
+df = pd.read_sql("SELECT name, calories, protein, carbs, fat FROM bookmarks", engine)
 
 
 def generate_best_plan(df, user_goal, trials=1000, meal_size=5):

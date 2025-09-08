@@ -3,7 +3,7 @@ from datetime import datetime
 from .db import Base
 
 class FoodItem(Base):
-    __tablename__ = "food_items"
+    __tablename__ = "bookmarks"
 
     name = Column(String, primary_key=True, index=True)
     calories = Column(Integer, nullable=False)
