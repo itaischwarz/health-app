@@ -75,62 +75,41 @@ def create_plan(goals_dict, prefs, currentStanding):
     # columns variable you had; keep but it's not used for nutrient sums now
     columns = df.iloc[:,1:].shape[1]
     print("columns", columns)
-
-    # Upper bound on number of distinct foods chosen (heuristic: remaining_calories/10)
-    distinct_items = max(1, int(remaining_calories / 100))
-
-    # Target vector [remaining calories, protein, carbs, fat]
     t = np.array([remaining_calories, remaining_protein, remaining_carbs, remaining_fat])  # last three for categories
-
-    # Weight vector: how much to prioritize each nutrient deviation in optimization
     w = np.array([1.0, 1.0, 1.0, 1.0])  # protein, carbs, fat deviations penalized more
-
-    # Upper bounds for how many units of each food can be chosen (here: 2 units each, sized to df)
     U = [2] * total_items
-
-    print("HERE")
-
-    # Create CP-SAT model
     m = cp_model.CpModel()
-
-    # Decision vars: how many units of each food (0..U[i])
     x = [m.NewIntVar(0, U[i], f"x_{i}") for i in range(total_items)]
-
     # --- y should represent the four nutrient totals (calories, protein, carbs, fat) ---
-    y = [m.NewIntVar(0, 1000000, f"y_{k}") for k in range(categories)]
-
-    # Boolean vars: whether a food is selected at all
+    y = [m.NewIntVar(0, 1000000, f"y_{k}") for k in range(columns)]
     z = [m.NewBoolVar(f"z_{i}") for i in range(total_items)]
-
-    # Map df index -> position (we reset no index, so this is 0..n-1)
     pos_map = {idx: i for i, idx in enumerate(df.index)}
-
-    # recompute df_breads using current df (after prefs)
     df_breads = df[df[name_col].astype(str).str.lower().str.contains(r"bread|bagel", na=False)]
     bread_positions = [pos_map[idx] for idx in df_breads.index if idx in pos_map]
-    print("bread positions", bread_positions)
-
-    # how many spread rows exist in the data (constant)
     spread_positions = [df.index.get_loc(idx) for idx in df_spreads.index if idx in df.index]
-    
     spread_count = len(spread_positions)
     # enforce bread-servings == spread_count (if impossible, return None early)
     if spread_count > 0 and len(bread_positions) == 0:
         # no breads available but spread required -> infeasible catalog
         return {"plan": None, "metrics": {"error": "spread_count > 0 but no breads available in catalog after prefs"}}
-    # add the constraint (sum of bread servings equals spread_count)
 
     if len(bread_positions) > 0:
         m.Add(sum(x[p] for p in bread_positions) == sum(x[s] for s in spread_positions))
 
-    # Link z and x (z true iff x >= 1)
     for i in range(total_items):
         m.Add(x[i] >= 1).OnlyEnforceIf(z[i])
         m.Add(x[i] == 0).OnlyEnforceIf(z[i].Not())
 
-    # Constraint: total distinct foods used <= distinct_items
-    m.Add(sum(z) <= distinct_items)
+    total = []
+    for j in range(categories+1, columns):
+        total.append(sum(df.iloc[i, j] * z[i] for i in range(total_items)))
 
+    for i in range(0, columns-categories-1):
+        m.Add(total[i] >= 1)
+        m.Add(total[i] <= 2)
+
+    for i in range(total_items):
+        m.Add(x[i] >= 0)
     # --- Nutrient totals: compute from explicit nutrient columns (safe and clear) ---
     # Use columns explicitly to avoid mis-indexing (A contains many columns after get_dummies)
     # We expect df has columns: name, calories, protein_g, carbs_g, fat_g, ... (possibly other dummies)
@@ -177,10 +156,9 @@ def create_plan(goals_dict, prefs, currentStanding):
     solution = {f"{foods[i]}": solver.Value(x[i]) for i in range(len(x)) if solver.Value(x[i]) > 0}
     # Metrics: actual totals for [calories, protein, carbs, fat]
     metrics  = [solver.Value(y[k]) for k in range(categories)]
-    print(sum(solution.values()))
 
 
-    
+
     return {"plan": solution, "metrics": metrics}
 
 print(create_plan({'target_calories': 2000, 'target_protein': 90.0, 'target_carbs': 150.0, 'max_fat': 50.0}, {}, {'current_calories': 0, 'current_protein': 0, 'current_carbs': 0, 'current_fat': 0}))
