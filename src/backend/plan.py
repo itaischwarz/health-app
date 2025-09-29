@@ -12,12 +12,31 @@ def create_plan(goals_dict, prefs, currentStanding):
     connection = psycopg2.connect(dbname="food_db", user="viewer", host="localhost", port="5432")
 
     # Load calories, protein, carbs, fat per 100g from foods table into a DataFrame
-    df = pd.read_sql("SELECT calories_per_100g, protein_g, carbs_g, fat_g, category FROM foods;", connection)
+    df = pd.read_sql("SELECT name ,calories, protein_g, carbs_g, fat_g, category, spread FROM foods;", connection)
+
+    df["spread"] = df["spread"].replace({"Yes": 1, "No": 0})
+
+
+    # df_spreads = df[
+    #     ~df["food_name"].str.contains("Milk", case=False, na=False) &
+    #     ~df["food_name"].str.contains("Yogurt", case=False, na=False) 
+    # ]
+    
+
+    df_spreads = df[df["category"].str.lower().str.contains("dairy")]
+    print(df_spreads)
+    df_breads = df[df["food_name"].str.lower().str.contains(r"bread|bagel", na=False)]
+
+    # df_breads = df[(df["food_name"].str.lower().str.contains("bread")) | (df["food_name"].str.lower().str.contains("bagel"))]
+    # print(df_breads)
+    if "vegetarian" in prefs:
+        df = df[df["category"] != "meat"]
+    if "vegan" in prefs:
+        df = df[(df["category"] != "meat") & (df["category"] != "dairy") & (df["food_name"] != "egg")] 
+    if "kosher" in prefs or "halal" in prefs:
+        df = df[~df["Food"].str.contains("pork", case=False, na=False) & ~df["Food"].str.contains("ham", case=False, na=False) & ~df["Food"].str.contains("bacon", case=False, na=False)]
 
     df = pd.get_dummies(df, columns=["category"], dtype=int)
-    # df = pd.get_dummies(df, columns=["category"], dtype=int)
-
-
     # Convert DataFrame to numpy array (rows = foods, cols = nutrients)
     A = df.to_numpy()
 
@@ -36,10 +55,13 @@ def create_plan(goals_dict, prefs, currentStanding):
     remaining_fat     = dailyGoals.max_fat - currentDayStatistics.current_fat
 
 
-    total_items = 199 
+    total_items = 52 
 
     # Number of nutrient categories (4: calories, protein, carbs, fat)
-    categories = 11
+    print(df.head())
+    categories = 4
+    columns = df.iloc[:,1:].shape[1]
+    print("columns", columns)
 
     # Upper bound on number of distinct foods chosen (heuristic: remaining_calories/10)
     distinct_items = int(remaining_calories / 180)
@@ -48,10 +70,10 @@ def create_plan(goals_dict, prefs, currentStanding):
     t = np.array([remaining_calories, remaining_protein, remaining_carbs, remaining_fat])  # last three for categories
 
     # Weight vector: how much to prioritize each nutrient deviation in optimization
-    w = np.array([1.0, 20.0, 20.0, 30.0])  # protein, carbs, fat deviations penalized more
+    w = np.array([1.0, 1.0, 1.0, 1.0])  # protein, carbs, fat deviations penalized more
 
     # Upper bounds for how many units of each food can be chosen (here: 200 items max, 2 units each)
-    U = 199 * [2]   
+    U = 52 * [2]   
 
     print("HERE")
 
@@ -61,24 +83,18 @@ def create_plan(goals_dict, prefs, currentStanding):
     m = cp_model.CpModel()
 
     # Decision vars: how many units of each food (0..U[i])
-    x = [m.NewIntVar(0, U[i], f"x_{i}") for i in range(total_items)]
+    x = [m.NewIntVar(0, U[i], f"x_{i-1}") for i in range(total_items)]
 
-    y = [m.NewIntVar(0, 10000, f"y_{k}") for k in range(categories)]
+    y = [m.NewIntVar(0, 10000, f"y_{k}") for k in range(columns)]
     
 
     # Boolean vars: whether a food is selected at all
-    z = [m.NewBoolVar(f"z_{i}") for i in range(total_items)]
+    z = [m.NewBoolVar(f"z_{i-1}") for i in range(total_items)]
 
-
-    m.Add(y[5] > 0)
-    m.Add(y[6] > 0)
-    m.Add(y[8] > 0)
-    # m.Add(y[8] <= 2)
-    m.Add(y[9] > 0)
-    m.Add(y[10] > 0)
-
-
-
+    m.Add(x[(df["spread"] == 1).iloc(:, 1)]  = )
+    for i in range(categories,columns):
+        m.Add(y[i] > 0)
+        m.Add(y[i] <= 2)
 
     for i in range(total_items):
         m.Add(x[i] >= 0).OnlyEnforceIf(z[i])
@@ -91,8 +107,9 @@ def create_plan(goals_dict, prefs, currentStanding):
 
 
     # Nutrient totals: y[k] = sum of (nutrient value of food * servings of food)
-    for k in range((categories)):
-        m.Add(y[k] == sum(int(A[i, k]) * x[i] for i in range(total_items)))
+    for k in range((columns)):
+        print(A[i, k])
+        m.Add(y[k] == sum(int(A[i, k+1]) * x[i] for i in range(total_items)))
 
     # Deviation variables (positive and negative) for each nutrient target
     dev_pos = [m.NewIntVar(0, 10000, f"dpos_{k}") for k in range(categories)]
@@ -101,11 +118,11 @@ def create_plan(goals_dict, prefs, currentStanding):
     print(total_items)
 
     # Constraint: (actual - target) = (positive deviation - negative deviation)
-    for k in range(4):
+    for k in range(categories):
         m.Add(y[k] - int(t[k]) == dev_pos[k] - dev_neg[k])
 
     # Objective: Minimize weighted sum of deviations (try to hit targets closely)
-    m.Minimize(sum(int(w[k]) * (dev_pos[k] + dev_neg[k]) for k in range(4)))
+    m.Minimize(sum(int(w[k]) * (dev_pos[k] + dev_neg[k]) for k in range(categories)))
 
     # Create solver
     solver = cp_model.CpSolver()
@@ -121,17 +138,19 @@ def create_plan(goals_dict, prefs, currentStanding):
     solver.parameters.max_time_in_seconds = 5
 
     # Load food names to map variables back to food items
-    foods_df = pd.read_sql("SELECT name FROM foods", connection)
-    foods = foods_df.to_numpy()
+    # foods_df = pd.read_sql("SELECT name FROM foods", connection)
+    foods = df.iloc[:, 0].to_numpy()
     # Solution: servings of each food
     solution = {f"{foods[i]}": solver.Value(x[i]) for i in range(len(x) ) if solver.Value(x[i]) > 0}
     # Metrics: actual totals for [calories, protein, carbs, fat]
+    # solver.Minimize(abs(sum(calories[i]*x[i]) - target_calories))
+
     metrics  = [solver.Value(y[k]) for k in range(len(y)) ]
     print(sum(solution.values()))
     return {"plan": solution, "metrics": metrics}
 
 
-print(create_plan({'target_calories': 2000, 'target_protein': 90.0, 'target_carbs': 150.0, 'max_fat': 50.0}, None, {'current_calories': 0, 'current_protein': 0, 'current_carbs': 0, 'current_fat': 0}))
+print(create_plan({'target_calories': 2000, 'target_protein': 90.0, 'target_carbs': 150.0, 'max_fat': 50.0}, {}, {'current_calories': 0, 'current_protein': 0, 'current_carbs': 0, 'current_fat': 0}))
 
 
 # def create_meal(target_calories, target_protein, target_carbs):

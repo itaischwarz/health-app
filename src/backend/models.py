@@ -5,7 +5,6 @@ from pydantic import BaseModel
 
 class FoodItem(Base):
     __tablename__ = "foods"
-
     name = Column(String, primary_key=True, index=True)
     calories_per_100g = Column(Integer, nullable=False)
     protein_g = Column(Float, nullable=False)

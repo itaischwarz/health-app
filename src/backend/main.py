@@ -2,7 +2,7 @@ from typing import Union, Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
 from enum import Enum
-from db import engine, Base
+from db import engine, Base, SessionLocal
 from models import FoodItem, goals, DietaryPrefrences, dayStatistics
 from fastapi.middleware.cors import CORSMiddleware
 from plan import create_plan
@@ -39,8 +39,14 @@ def get_plan(
     total_protein: int,
     total_carbs: int,
     total_fat: int,
+    foods_list: int = None,
     prefs: Optional[str] = None,
 ):
+    # print(foods[0])
+    db = SessionLocal()
+    foods = db.query(FoodItem).all()
+    print(foods[foods["name"]=="Apple"])
+
     goals = {"target_calories": calories, "target_protein": protein, "target_carbs": carbs, "max_fat": fat}
     current_standing = {
         "current_calories": total_calories,
@@ -49,8 +55,9 @@ def get_plan(
         "current_fat": total_fat,
     }
     
-    plan = create_plan(goals, prefs, current_standing)
-    plan_metrics, plan_solution = plan["metrics"], plan["plan"]
+    # plan = create_plan(goals, prefs, current_standing)
+    # plan_metrics, plan_solution = plan["metrics"], plan["plan"]
+    print("HERERERE")
+    # print(plan_metrics, plan_solution)
 
-    print(plan_metrics, plan_solution)
-    return JSONResponse(content={"metrics": plan_metrics, "solution": plan_solution})
+    return "theta"
