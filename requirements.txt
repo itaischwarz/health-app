@@ -1,3 +1,5 @@
-fastapi==0.0.8
-sqlalchemy
-# psycopg2-binary  # Only needed for PostgreSQL
+fastapi[standard]==0.117.1
+sqlalchemy==2.0.20
+psycopg2-binary==2.9.7
+pandas==2.2.3
+ortools==9.14.6206

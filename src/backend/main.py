@@ -45,7 +45,8 @@ def get_plan(
     # print(foods[0])
     db = SessionLocal()
     foods = db.query(FoodItem).all()
-    print(foods[foods["name"]=="Apple"])
+    
+    print(f"Found {len(foods)} foods in database")
 
     goals = {"target_calories": calories, "target_protein": protein, "target_carbs": carbs, "max_fat": fat}
     current_standing = {
@@ -55,9 +56,12 @@ def get_plan(
         "current_fat": total_fat,
     }
     
-    # plan = create_plan(goals, prefs, current_standing)
-    # plan_metrics, plan_solution = plan["metrics"], plan["plan"]
-    print("HERERERE")
-    # print(plan_metrics, plan_solution)
-
-    return "theta"
+    plan = create_plan(goals, prefs, current_standing)
+    plan_metrics, plan_solution = plan["metrics"], plan["plan"]
+    print(f"Here are the plan metrics: {plan_metrics}")
+    
+    # Return JSON response instead of tuple
+    return {
+        "plan": plan_solution,
+        "metrics": plan_metrics
+    }
