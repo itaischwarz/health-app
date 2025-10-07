@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Float
+from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean
 from datetime import datetime
 from db import Base
 from pydantic import BaseModel
@@ -8,16 +8,17 @@ class FoodItem(Base):
     name = Column(String, primary_key=True, index=True)
     calories = Column(Integer, nullable=False)
     protein_g = Column(Float, nullable=False)
-    carbs_g = Column(Float, nullable=False)  # comma-separated tags
+    carbs_g = Column(Float, nullable=False)
     fat_g = Column(Float, nullable=False)
-      # comma-separated tags
+    category = Column(String, nullable=True)  # Food categories like "carbs", "meat", "dairy"
+    spread = Column(Boolean, nullable=True)   # Whether item is a spread
 
 class goals(BaseModel):
     
     target_calories: int
-    target_protein: float = None
-    target_carbs: float = None
-    max_fat: float = None
+    target_protein: float
+    target_carbs: float
+    max_fat: float
     
 class DietaryPrefrences(BaseModel):
     vegetarian: float = False

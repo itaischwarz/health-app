@@ -149,19 +149,46 @@ def create_plan(goals_dict, prefs, currentStanding):
     # Load food names to map variables back to food items
     foods = df.iloc[:, 0].to_numpy()
     # Solution: servings of each food
-    solution = {f"{foods[i]}": solver.Value(x[i]) for i in range(len(x)) if solver.Value(x[i]) > 0}
+    solution = {f"{foods[i]}": (solver.Value(x[i]), df[df["name"] == foods[i]]["catehor"].values[0]) for i in range(len(x)) if solver.Value(x[i]) > 0}
     # Metrics: actual totals for [calories, protein, carbs, fat]
     metrics  = [solver.Value(y[k]) for k in range(categories)]
 
 
-
+    print(solution)
     return {"plan": solution, "metrics": metrics}
 
+print(create_plan({"target_calories": 2500, "target_protein": 150, "target_carbs": 100, "max_fat": 150}, None, {"current_calories": 0, "current_protein": 0, "current_carbs": 0, "current_fat": 0}))
 
 
 
 
 
-# def create_meal(target_calories, target_protein, target_carbs):
+
+def create_meal(foods_dict, metrics, total_calories):
+    added_calories = metrics[0]
+    added_protein = metrics[1]
+    added_carbs = metrics[2]
+    added_fat = metrics[3]
+
+    meals = []
+
+    if total_calories == added_calories:
+        meals.append("breakfast")
+    if total_calories/added_calories > 2:
+        meals.append("lunch")
+    if total_calories/added_calories > 3:
+        meals.append("dinner")
+
+    food_names = [food for food in foods_dict.keys()]
+    df_chosen_foods = df[df["name"].isin(food_namess)]
+    df_chosen_foods["servings"] = foods_dict.values()
+    
+   
+
+
+        
+
+
+
 
 
