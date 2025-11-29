@@ -1,194 +1,286 @@
-from models import FoodItem, goals, DietaryPrefrences, dayStatistics
-from sqlalchemy.orm import Session
-from db import SessionLocal, engine
+import torch
+import torch.nn as nn
+import torch.optim as optim
 import pandas as pd
-from ortools.sat.python import cp_model
 import numpy as np
-import math
+from db import SessionLocal, engine
+import sqlite3
+
+class NeutritionPlanner(nn.Module):
+    def __init__(self, num_foods, num_nutrients=4, hidden_dim=128):
+        super(NeutritionPlanner, self).__init__()
+        
+        self.num_foods = num_foods
+        self.num_nutrients = num_nutrients
+        
+        # Embedding layer for food features
+        self.food_encoder = nn.Sequential(
+            nn.Linear(num_nutrients + 10, hidden_dim),  # nutrients + category features
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Dropout(0.2)
+        )
+        
+        # Context encoder for goals and current state
+        self.context_encoder = nn.Sequential(
+            nn.Linear(num_nutrients * 2, hidden_dim),  # goals + current state
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU()
+        )
+        
+        # Attention mechanism to select foods based on context
+        self.attention = nn.MultiheadAttention(hidden_dim, num_heads=4, batch_first=True)
+        
+        # Serving size predictor (outputs servings for each food)
+        self.serving_predictor = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim // 2),
+            nn.ReLU(),
+            nn.Linear(hidden_dim // 2, 1),
+            nn.Sigmoid()  # Output between 0-1, will scale to 0-2 servings
+        )
+        
+    def forward(self, food_features, context):
+        """
+        Args:
+            food_features: [batch_size, num_foods, num_features] - nutritional info + categories
+            context: [batch_size, num_nutrients * 2] - goals + current state
+        Returns:
+            servings: [batch_size, num_foods] - predicted servings for each food
+        """
+        batch_size = food_features.shape[0]
+        
+        # Encode each food
+        food_encoded = self.food_encoder(food_features)  # [batch, num_foods, hidden_dim]
+        
+        # Encode context (goals + current state)
+        context_encoded = self.context_encoder(context)  # [batch, hidden_dim]
+        context_encoded = context_encoded.unsqueeze(1)  # [batch, 1, hidden_dim]
+        
+        # Apply attention: foods attend to context
+        attended_foods, _ = self.attention(
+            food_encoded, 
+            context_encoded.expand(-1, self.num_foods, -1),
+            context_encoded.expand(-1, self.num_foods, -1)
+        )  # [batch, num_foods, hidden_dim]
+        
+        # Predict servings for each food
+        servings = self.serving_predictor(attended_foods).squeeze(-1)  # [batch, num_foods]
+        servings = servings * 2  # Scale to 0-2 servings
+        
+        return servings
+
+
+class MealPlannerTrainer:
+    def __init__(self, df, device='cpu'):
+        self.df = df
+        self.device = device
+        self.model = None
+        self.food_features = None
+        self.food_names = None
+        
+    def prepare_data(self, prefs=None):
+        """Prepare and filter dataframe based on preferences"""
+        df = self.df.copy()
+        
+        # Apply dietary preferences
+        if prefs:
+            if "vegetarian" in prefs:
+                df = df[~df["category"].str.lower().eq("meat")]
+            if "vegan" in prefs:
+                df = df[
+                    (~df["category"].str.lower().eq("meat")) &
+                    (~df["category"].str.lower().eq("dairy")) &
+                    (~df["name"].str.lower().str.contains(r"\begg\b", na=False))
+                ]
+            if "kosher" in prefs or "halal" in prefs:
+                df = df[~df["name"].str.contains(r"\b(pork|ham|bacon)\b", case=False, na=False)]
+        
+        # One-hot encode categories
+        df = pd.get_dummies(df, columns=["category"], dtype=int)
+        
+        # Store food names
+        self.food_names = df["name"].values
+        
+        # Extract features: [calories, protein, carbs, fat, ...category_dummies]
+        nutrient_cols = ['calories', 'protein_g', 'carbs_g', 'fat_g']
+        category_cols = [col for col in df.columns if col.startswith('category_')]
+        
+        feature_cols = nutrient_cols + category_cols
+        self.food_features = torch.FloatTensor(df[feature_cols].values).to(self.device)
+        
+        # Initialize model
+        num_foods = len(df)
+        num_features = len(feature_cols)
+        self.model = NeutritionPlanner(num_foods, num_nutrients=4, hidden_dim=128).to(self.device)
+        
+        return df
+    
+    def create_context_tensor(self, goals_dict, currentStanding):
+        """Create context tensor from goals and current state"""
+        # Remaining nutrients needed
+        remaining = [
+            goals_dict["target_calories"] - currentStanding["current_calories"],
+            goals_dict["target_protein"] - currentStanding["current_protein"],
+            goals_dict["target_carbs"] - currentStanding["current_carbs"],
+            goals_dict["max_fat"] - currentStanding["current_fat"]
+        ]
+        
+        # Goals
+        goals = [
+            goals_dict["target_calories"],
+            goals_dict["target_protein"],
+            goals_dict["target_carbs"],
+            goals_dict["max_fat"]
+        ]
+        
+        # Concatenate: [remaining, goals]
+        context = torch.FloatTensor(remaining + goals).unsqueeze(0).to(self.device)
+        return context
+    
+    def compute_loss(self, servings, context, food_features):
+        """
+        Custom loss function that penalizes deviation from nutritional goals
+        and enforces constraints
+        """
+        batch_size = servings.shape[0]
+        
+        # Extract nutrient columns (first 4 features)
+        nutrients = food_features[:, :, :4]  # [batch, num_foods, 4]
+        
+        # Calculate actual nutrients from servings
+        actual_nutrients = torch.sum(servings.unsqueeze(-1) * nutrients, dim=1)  # [batch, 4]
+        
+        # Extract remaining targets from context (first 4 values)
+        targets = context[:, :4]  # [batch, 4]
+        
+        # Deviation loss: minimize difference from targets
+        weights = torch.FloatTensor([1.0, 2.0, 1.0, 1.0]).to(self.device)  # protein weighted more
+        deviation_loss = torch.sum(weights * torch.abs(actual_nutrients - targets))
+        
+        # Sparsity loss: encourage selecting fewer foods
+        sparsity_loss = 0.1 * torch.sum(torch.sigmoid(servings * 10))  # soft threshold
+        
+        # Diversity loss: encourage variety across categories
+        # (categories are in features beyond first 4)
+        category_features = food_features[:, :, 4:]  # [batch, num_foods, num_categories]
+        selected_categories = torch.sum(
+            servings.unsqueeze(-1) * category_features, dim=1
+        )  # [batch, num_categories]
+        diversity_loss = -0.05 * torch.sum(torch.clamp(selected_categories, 0, 1))
+        
+        total_loss = deviation_loss + sparsity_loss + diversity_loss
+        
+        return total_loss, {
+            'deviation': deviation_loss.item(),
+            'sparsity': sparsity_loss.item(),
+            'diversity': diversity_loss.item(),
+            'actual_nutrients': actual_nutrients[0].detach().cpu().numpy()
+        }
+    
+    def train_for_plan(self, goals_dict, currentStanding, prefs=None, num_iterations=1000, lr=0.01):
+        """Train model to generate a meal plan for specific goals"""
+        # Prepare data
+        df = self.prepare_data(prefs)
+        
+        # Create context
+        context = self.create_context_tensor(goals_dict, currentStanding)
+        
+        # Prepare food features (add batch dimension)
+        food_features_batch = self.food_features.unsqueeze(0)  # [1, num_foods, num_features]
+        
+        # Optimizer
+        optimizer = optim.Adam(self.model.parameters(), lr=lr)
+        
+        # Training loop
+        best_loss = float('inf')
+        best_servings = None
+        
+        for iteration in range(num_iterations):
+            optimizer.zero_grad()
+            
+            # Forward pass
+            servings = self.model(food_features_batch, context)
+            
+            # Compute loss
+            loss, metrics = self.compute_loss(servings, context, food_features_batch)
+            
+            # Backward pass
+            loss.backward()
+            optimizer.step()
+            
+            # Track best solution
+            if loss.item() < best_loss:
+                best_loss = loss.item()
+                best_servings = servings.detach().clone()
+            
+            if iteration % 100 == 0:
+                print(f"Iteration {iteration}: Loss = {loss.item():.2f}, "
+                      f"Deviation = {metrics['deviation']:.2f}")
+        
+        return self.extract_plan(best_servings, metrics)
+    
+    def extract_plan(self, servings, metrics):
+        """Convert model output to meal plan format"""
+        servings_np = servings.squeeze().cpu().numpy()
+        
+        # Round servings and filter out near-zero values
+        servings_rounded = np.round(servings_np)
+        threshold = 0.5
+        
+        plan = {}
+        for i, (name, serving) in enumerate(zip(self.food_names, servings_rounded)):
+            if serving >= threshold:
+                # Get category from dataframe
+                category = self.df[self.df["name"] == name]["category"].values[0] if "category" in self.df.columns else "unknown"
+                plan[name] = (int(serving), category)
+        
+        return {
+            "plan": plan if len(plan) > 0 else None,
+            "metrics": metrics['actual_nutrients']
+        }
+
 
 def create_plan(goals_dict, prefs, currentStanding):
-    # Load calories, protein, carbs, fat per 100g from foods table into a DataFrame
-    df = pd.read_sql("SELECT name, calories, protein_g, carbs_g, fat_g, category, spread FROM foods;", engine)
-
-    # Normalize spread column values
-    df["spread"] = df["spread"].replace({"Yes": 1, "No": 0, True: 1, False: 0}).fillna(0).astype(int)
-
-    # Ensure category comparisons are safe (lowercase)
-    df["category"] = df["category"].astype(str)
-
-    # find the correct name column (some of your code used 'food_name' vs 'name')
-    if "food_name" in df.columns:
-        name_col = "food_name"
-    else:
-        name_col = "name"
-
-    # df_spreads: dairy items (case-insensitive)
-    df_spreads = df[df["spread"] == 1]
-
-    # df_breads using the detected name column
-    df_breads = df[df[name_col].astype(str).str.lower().str.contains(r"bread|bagel", na=False)]
-
-    # Apply preferences (use name_col consistently and lowercase category checks)
-
-    print(f"Here are the prefs: {prefs}")
-
-    if prefs and "vegetarian" in prefs:
-        df = df[~df["category"].str.lower().eq("meat")]
-    if prefs and  "vegan" in prefs:
-        df = df[
-            (~df["category"].str.lower().eq("meat")) &
-            (~df["category"].str.lower().eq("dairy")) &
-            (~df[name_col].str.lower().str.contains(r"\begg\b", na=False))
-        ]
-    if prefs and  ("kosher" in prefs or "halal" in prefs):
-        df = df[
-            ~df[name_col].str.contains(r"\b(pork|ham|bacon)\b", case=False, na=False)
-        ]
-
-    # one-hot categories (this will add columns after the 4 nutrient columns)
-    df = pd.get_dummies(df, columns=["category"], dtype=int)
-
-    # Convert DataFrame to numpy array (rows = foods, cols = nutrients + other columns)
-    A = df.to_numpy()
-
-    # Daily nutrition targets (object from your goals dataclass/model)
-    dailyGoals = goals(**goals_dict)
-
-    # Current day's nutrition totals (object from your dayStatistics dataclass/model)
-    currentDayStatistics = dayStatistics(**currentStanding)
-
-    # Remaining targets = daily goal – current intake
-    remaining_calories = dailyGoals.target_calories - currentDayStatistics.current_calories
-    remaining_protein = dailyGoals.target_protein - currentDayStatistics.current_protein
-    remaining_carbs   = dailyGoals.target_carbs - currentDayStatistics.current_carbs
-    remaining_fat     = dailyGoals.max_fat - currentDayStatistics.current_fat
-
-    # --- SMALL FIX: align total_items with dataframe length (was hardcoded) ---
-    total_items = len(df)
-
-    # Number of nutrient categories (4: calories, protein, carbs, fat)
-    categories = 4
-
-    # columns variable you had; keep but it's not used for nutrient sums now
-    columns = df.iloc[:,1:].shape[1]
-    t = np.array([remaining_calories, remaining_protein, remaining_carbs, remaining_fat])  # last three for categories
-    w = np.array([1.0, 2.0, 1.0, 1.0])  # protein, carbs, fat deviations penalized more
-    U = [2] * total_items
-    m = cp_model.CpModel()
-    x = [m.NewIntVar(0, U[i], f"x_{i}") for i in range(total_items)]
-    # --- y should represent the four nutrient totals (calories, protein, carbs, fat) ---
-    y = [m.NewIntVar(0, 1000000, f"y_{k}") for k in range(columns)]
-    z = [m.NewBoolVar(f"z_{i}") for i in range(total_items)]
-    pos_map = {idx: i for i, idx in enumerate(df.index)}
-    df_breads = df[df[name_col].astype(str).str.lower().str.contains(r"bread|bagel", na=False)]
-    bread_positions = [pos_map[idx] for idx in df_breads.index if idx in pos_map]
-    spread_positions = [df.index.get_loc(idx) for idx in df_spreads.index if idx in df.index]
-    spread_count = len(spread_positions)
-    # enforce bread-servings == spread_count (if impossible, return None early)
-    if spread_count > 0 and len(bread_positions) == 0:
-        # no breads available but spread required -> infeasible catalog
-        return {"plan": None, "metrics": {"error": "spread_count > 0 but no breads available in catalog after prefs"}}
-
-    if len(bread_positions) > 0:
-        m.Add(sum(x[p] for p in bread_positions) == sum(x[s] for s in spread_positions))
-
-    for i in range(total_items):
-        m.Add(x[i] >= 1).OnlyEnforceIf(z[i])
-        m.Add(x[i] == 0).OnlyEnforceIf(z[i].Not())
-
-    total = []
-    for j in range(categories+1, columns):
-        total.append(sum(df.iloc[i, j] * z[i] for i in range(total_items)))
-
-    for i in range(0, columns-categories-1):
-        m.Add(total[i] >= 1)
-        m.Add(total[i] <= 2)
-
-    for i in range(total_items):
-        m.Add(x[i] >= 0)
-    # --- Nutrient totals: compute from explicit nutrient columns (safe and clear) ---
-    # Use columns explicitly to avoid mis-indexing (A contains many columns after get_dummies)
-    # We expect df has columns: name, calories, protein_g, carbs_g, fat_g, ... (possibly other dummies)
-    nutrient_cols = ['calories', 'protein_g', 'carbs_g', 'fat_g']
-    for k in range(categories):
-        coeffs = []
-        for i in range(total_items):
-            # safe extraction: if column missing fallback to 0
-            try:
-                coeff = int(df.iloc[i][nutrient_cols[k]])
-            except Exception:
-                coeff = 0
-            coeffs.append(coeff)
-        m.Add(y[k] == sum(coeffs[i] * x[i] for i in range(total_items)))
-
-    # Deviation variables (positive and negative) for each nutrient target
-    dev_pos = [m.NewIntVar(0, 1000000, f"dpos_{k}") for k in range(categories)]
-    dev_neg = [m.NewIntVar(0, 1000000, f"dneg_{k}") for k in range(categories)]
+    """Main function compatible with original interface"""
+    # Load data
+    conn = sqlite3.connect("foods.db")
+    cur = conn.cursor()
+    cur.execute("""
+                SELECT * FROM foods
+                """)
 
 
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
 
-    # Constraint: (actual - target) = (positive deviation - negative deviation)
-    for k in range(categories):
-        m.Add(y[k] - int(t[k]) == dev_pos[k] - dev_neg[k])
+    conn.close()
+    exit()
 
-    # Objective: Minimize weighted sum of deviations (try to hit targets closely)
-    # scale weights into integers for CP-SAT
-    scale = 100
-    int_w = [int(w[k] * scale) for k in range(categories)]
-    m.Minimize(sum(int_w[k] * (dev_pos[k] + dev_neg[k]) for k in range(categories)))
-
-    # Create solver and set time limit BEFORE Solve
-    solver = cp_model.CpSolver()
-    solver.parameters.max_time_in_seconds = 5
-    status = solver.Solve(m)
-
-    # If no feasible solution, return None
-    if status != cp_model.OPTIMAL and status != cp_model.FEASIBLE:
-        return {"plan": None, "metrics": None}
-
-    # Load food names to map variables back to food items
-    foods = df.iloc[:, 0].to_numpy()
-    # Solution: servings of each food
-    solution = {f"{foods[i]}": (solver.Value(x[i]), df[df["name"] == foods[i]]["catehor"].values[0]) for i in range(len(x)) if solver.Value(x[i]) > 0}
-    # Metrics: actual totals for [calories, protein, carbs, fat]
-    metrics  = [solver.Value(y[k]) for k in range(categories)]
-
-
-    print(solution)
-    return {"plan": solution, "metrics": metrics}
-
-print(create_plan({"target_calories": 2500, "target_protein": 150, "target_carbs": 100, "max_fat": 150}, None, {"current_calories": 0, "current_protein": 0, "current_carbs": 0, "current_fat": 0}))
-
-
-
-
-
-
-def create_meal(foods_dict, metrics, total_calories):
-    added_calories = metrics[0]
-    added_protein = metrics[1]
-    added_carbs = metrics[2]
-    added_fat = metrics[3]
-
-    meals = []
-
-    if total_calories == added_calories:
-        meals.append("breakfast")
-    if total_calories/added_calories > 2:
-        meals.append("lunch")
-    if total_calories/added_calories > 3:
-        meals.append("dinner")
-
-    food_names = [food for food in foods_dict.keys()]
-    df_chosen_foods = df[df["name"].isin(food_namess)]
-    df_chosen_foods["servings"] = foods_dict.values()
+    df = pd.read_sql("SELECT name, calories, protein, carbs, fat, category, spread FROM foods")
     
-   
+    # Normalize spread column
+    df["spread"] = df["spread"].replace({"Yes": 1, "No": 0, True: 1, False: 0}).fillna(0).astype(int)
+    df["category"] = df["category"].astype(str)
+    
+    # Create trainer
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    trainer = MealPlannerTrainer(df, device=device)
+    
+    # Train and generate plan
+    result = trainer.train_for_plan(goals_dict, currentStanding, prefs, num_iterations=500)
+    
+    print(result)
+    return result
 
 
-        
-
-
-
-
-
+# Example usage
+if __name__ == "__main__":
+    result = create_plan(
+        {"target_calories": 2500, "target_protein": 150, "target_carbs": 100, "max_fat": 150},
+        None,
+        {"current_calories": 0, "current_protein": 0, "current_carbs": 0, "current_fat": 0}
+    )

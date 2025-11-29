@@ -1,0 +1,2323 @@
+[
+  {
+    "name": "Chicken Breast (grilled)",
+    "category": "protein",
+    "calories": 165,
+    "protein": 31,
+    "carbs": 0,
+    "fat": 4,
+    "fiber": 0
+  },
+  {
+    "name": "Chicken Thigh (roasted)",
+    "category": "protein",
+    "calories": 209,
+    "protein": 26,
+    "carbs": 0,
+    "fat": 10,
+    "fiber": 0
+  },
+  {
+    "name": "Ground Turkey (93% lean)",
+    "category": "protein",
+    "calories": 170,
+    "protein": 22,
+    "carbs": 0,
+    "fat": 9,
+    "fiber": 0
+  },
+  {
+    "name": "Salmon (baked)",
+    "category": "protein",
+    "calories": 208,
+    "protein": 22,
+    "carbs": 0,
+    "fat": 13,
+    "fiber": 0
+  },
+  {
+    "name": "Cod (baked)",
+    "category": "protein",
+    "calories": 82,
+    "protein": 18,
+    "carbs": 0,
+    "fat": 1,
+    "fiber": 0
+  },
+  {
+    "name": "Shrimp (boiled)",
+    "category": "protein",
+    "calories": 99,
+    "protein": 24,
+    "carbs": 0,
+    "fat": 0,
+    "fiber": 0
+  },
+  {
+    "name": "Tilapia (grilled)",
+    "category": "protein",
+    "calories": 129,
+    "protein": 26,
+    "carbs": 0,
+    "fat": 2,
+    "fiber": 0
+  },
+  {
+    "name": "Tuna (canned in water)",
+    "category": "protein",
+    "calories": 89,
+    "protein": 20,
+    "carbs": 0,
+    "fat": 1,
+    "fiber": 0
+  },
+  {
+    "name": "Beef Sirloin (grilled)",
+    "category": "protein",
+    "calories": 240,
+    "protein": 27,
+    "carbs": 0,
+    "fat": 14,
+    "fiber": 0
+  },
+  {
+    "name": "Beef Tenderloin",
+    "category": "protein",
+    "calories": 324,
+    "protein": 27,
+    "carbs": 0,
+    "fat": 23,
+    "fiber": 0
+  },
+
+  {
+    "name": "Pork Loin (roasted)",
+    "category": "protein",
+    "calories": 242,
+    "protein": 27,
+    "carbs": 0,
+    "fat": 14,
+    "fiber": 0
+  },
+  {
+    "name": "Pork Chop (grilled)",
+    "category": "protein",
+    "calories": 231,
+    "protein": 29,
+    "carbs": 0,
+    "fat": 12,
+    "fiber": 0
+  },
+
+  {
+    "name": "Eggs (whole, boiled)",
+    "category": "protein",
+    "calories": 155,
+    "protein": 13,
+    "carbs": 1,
+    "fat": 11,
+    "fiber": 0
+  },
+  {
+    "name": "Egg Whites",
+    "category": "protein",
+    "calories": 52,
+    "protein": 11,
+    "carbs": 0,
+    "fat": 0,
+    "fiber": 0
+  },
+
+  {
+    "name": "Greek Yogurt (plain)",
+    "category": "dairy",
+    "calories": 59,
+    "protein": 10,
+    "carbs": 3,
+    "fat": 0,
+    "fiber": 0
+  },
+  {
+    "name": "Cottage Cheese (2%)",
+    "category": "dairy",
+    "calories": 98,
+    "protein": 11,
+    "carbs": 3,
+    "fat": 4,
+    "fiber": 0
+  },
+  {
+    "name": "Milk (whole)",
+    "category": "dairy",
+    "calories": 61,
+    "protein": 3,
+    "carbs": 5,
+    "fat": 3,
+    "fiber": 0
+  },
+  {
+    "name": "Cheddar Cheese",
+    "category": "dairy",
+    "calories": 403,
+    "protein": 25,
+    "carbs": 1,
+    "fat": 33,
+    "fiber": 0
+  },
+
+  {
+    "name": "Oats (dry)",
+    "category": "grain",
+    "calories": 389,
+    "protein": 17,
+    "carbs": 66,
+    "fat": 7,
+    "fiber": 10
+  },
+  {
+    "name": "Brown Rice (cooked)",
+    "category": "grain",
+    "calories": 123,
+    "protein": 3,
+    "carbs": 26,
+    "fat": 1,
+    "fiber": 2
+  },
+  {
+    "name": "White Rice (cooked)",
+    "category": "grain",
+    "calories": 130,
+    "protein": 2,
+    "carbs": 28,
+    "fat": 0,
+    "fiber": 0
+  },
+  {
+    "name": "Quinoa (cooked)",
+    "category": "grain",
+    "calories": 120,
+    "protein": 4,
+    "carbs": 21,
+    "fat": 2,
+    "fiber": 2
+  },
+  {
+    "name": "Whole Wheat Bread",
+    "category": "grain",
+    "calories": 247,
+    "protein": 13,
+    "carbs": 41,
+    "fat": 4,
+    "fiber": 7
+  },
+  {
+    "name": "Pasta (cooked)",
+    "category": "grain",
+    "calories": 131,
+    "protein": 5,
+    "carbs": 25,
+    "fat": 1,
+    "fiber": 1
+  },
+
+  {
+    "name": "Sweet Potato (baked)",
+    "category": "vegetable",
+    "calories": 86,
+    "protein": 1,
+    "carbs": 20,
+    "fat": 0,
+    "fiber": 3
+  },
+  {
+    "name": "Potato (boiled)",
+    "category": "vegetable",
+    "calories": 87,
+    "protein": 2,
+    "carbs": 20,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Broccoli (steamed)",
+    "category": "vegetable",
+    "calories": 35,
+    "protein": 3,
+    "carbs": 7,
+    "fat": 0,
+    "fiber": 3
+  },
+  {
+    "name": "Spinach (raw)",
+    "category": "vegetable",
+    "calories": 23,
+    "protein": 3,
+    "carbs": 3,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Asparagus (steamed)",
+    "category": "vegetable",
+    "calories": 20,
+    "protein": 2,
+    "carbs": 4,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Carrots (raw)",
+    "category": "vegetable",
+    "calories": 41,
+    "protein": 1,
+    "carbs": 10,
+    "fat": 0,
+    "fiber": 3
+  },
+  {
+    "name": "Mushrooms (raw)",
+    "category": "vegetable",
+    "calories": 22,
+    "protein": 3,
+    "carbs": 3,
+    "fat": 0,
+    "fiber": 1
+  },
+
+  {
+    "name": "Apple",
+    "category": "fruit",
+    "calories": 52,
+    "protein": 0,
+    "carbs": 14,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Banana",
+    "category": "fruit",
+    "calories": 89,
+    "protein": 1,
+    "carbs": 23,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Orange",
+    "category": "fruit",
+    "calories": 47,
+    "protein": 1,
+    "carbs": 12,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Blueberries",
+    "category": "fruit",
+    "calories": 57,
+    "protein": 1,
+    "carbs": 14,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Strawberries",
+    "category": "fruit",
+    "calories": 32,
+    "protein": 1,
+    "carbs": 8,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Grapes",
+    "category": "fruit",
+    "calories": 69,
+    "protein": 1,
+    "carbs": 18,
+    "fat": 0,
+    "fiber": 1
+  },
+  {
+    "name": "Pineapple",
+    "category": "fruit",
+    "calories": 50,
+    "protein": 0,
+    "carbs": 13,
+    "fat": 0,
+    "fiber": 1
+  },
+  {
+    "name": "Avocado",
+    "category": "fruit",
+    "calories": 160,
+    "protein": 2,
+    "carbs": 9,
+    "fat": 15,
+    "fiber": 7
+  },
+
+  {
+    "name": "Almonds",
+    "category": "nuts",
+    "calories": 579,
+    "protein": 21,
+    "carbs": 22,
+    "fat": 50,
+    "fiber": 13
+  },
+  {
+    "name": "Walnuts",
+    "category": "nuts",
+    "calories": 654,
+    "protein": 15,
+    "carbs": 14,
+    "fat": 65,
+    "fiber": 7
+  },
+  {
+    "name": "Peanut Butter",
+    "category": "spread",
+    "calories": 588,
+    "protein": 25,
+    "carbs": 20,
+    "fat": 50,
+    "fiber": 6
+  },
+  {
+    "name": "Olive Oil",
+    "category": "fat",
+    "calories": 884,
+    "protein": 0,
+    "carbs": 0,
+    "fat": 100,
+    "fiber": 0
+  },
+  {
+    "name": "Butter",
+    "category": "fat",
+    "calories": 717,
+    "protein": 1,
+    "carbs": 0,
+    "fat": 81,
+    "fiber": 0
+  },
+  {
+    "name": "Coconut Oil",
+    "category": "fat",
+    "calories": 892,
+    "protein": 0,
+    "carbs": 0,
+    "fat": 100,
+    "fiber": 0
+  },
+
+  {
+    "name": "Black Beans (cooked)",
+    "category": "legume",
+    "calories": 132,
+    "protein": 9,
+    "carbs": 24,
+    "fat": 1,
+    "fiber": 8
+  },
+  {
+    "name": "Lentils (cooked)",
+    "category": "legume",
+    "calories": 116,
+    "protein": 9,
+    "carbs": 20,
+    "fat": 0,
+    "fiber": 8
+  },
+  {
+    "name": "Chickpeas (cooked)",
+    "category": "legume",
+    "calories": 164,
+    "protein": 9,
+    "carbs": 27,
+    "fat": 3,
+    "fiber": 8
+  },
+  {
+    "name": "Kidney Beans (cooked)",
+    "category": "legume",
+    "calories": 127,
+    "protein": 8,
+    "carbs": 22,
+    "fat": 0,
+    "fiber": 6
+  },
+
+  {
+    "name": "Hummus",
+    "category": "spread",
+    "calories": 166,
+    "protein": 8,
+    "carbs": 14,
+    "fat": 9,
+    "fiber": 6
+  },
+  {
+    "name": "Tofu (firm)",
+    "category": "protein",
+    "calories": 144,
+    "protein": 15,
+    "carbs": 3,
+    "fat": 8,
+    "fiber": 1
+  },
+  {
+    "name": "Tempeh",
+    "category": "protein",
+    "calories": 192,
+    "protein": 20,
+    "carbs": 7,
+    "fat": 11,
+    "fiber": 5
+  },
+
+  {
+    "name": "Edamame",
+    "category": "legume",
+    "calories": 121,
+    "protein": 11,
+    "carbs": 10,
+    "fat": 5,
+    "fiber": 5
+  },
+  {
+    "name": "Peas (cooked)",
+    "category": "vegetable",
+    "calories": 81,
+    "protein": 5,
+    "carbs": 14,
+    "fat": 0,
+    "fiber": 6
+  },
+
+  {
+    "name": "Corn (cooked)",
+    "category": "vegetable",
+    "calories": 96,
+    "protein": 3,
+    "carbs": 21,
+    "fat": 1,
+    "fiber": 2
+  },
+  {
+    "name": "Cauliflower (steamed)",
+    "category": "vegetable",
+    "calories": 25,
+    "protein": 2,
+    "carbs": 5,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Zucchini (grilled)",
+    "category": "vegetable",
+    "calories": 17,
+    "protein": 1,
+    "carbs": 3,
+    "fat": 0,
+    "fiber": 1
+  },
+  {
+    "name": "Bell Pepper (raw)",
+    "category": "vegetable",
+    "calories": 31,
+    "protein": 1,
+    "carbs": 6,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Cabbage (raw)",
+    "category": "vegetable",
+    "calories": 25,
+    "protein": 1,
+    "carbs": 6,
+    "fat": 0,
+    "fiber": 3
+  },
+
+  {
+    "name": "Mixed Vegetables (steamed)",
+    "category": "vegetable",
+    "calories": 65,
+    "protein": 3,
+    "carbs": 12,
+    "fat": 1,
+    "fiber": 3
+  },
+
+  {
+    "name": "Romaine Lettuce",
+    "category": "vegetable",
+    "calories": 17,
+    "protein": 1,
+    "carbs": 3,
+    "fat": 0,
+    "fiber": 2
+  },
+
+  {
+    "name": "Peanut Oil",
+    "category": "fat",
+    "calories": 884,
+    "protein": 0,
+    "carbs": 0,
+    "fat": 100,
+    "fiber": 0
+  },
+  {
+    "name": "Canola Oil",
+    "category": "fat",
+    "calories": 884,
+    "protein": 0,
+    "carbs": 0,
+    "fat": 100,
+    "fiber": 0
+  },
+
+  {
+    "name": "Flax Seeds",
+    "category": "seeds",
+    "calories": 534,
+    "protein": 18,
+    "carbs": 29,
+    "fat": 42,
+    "fiber": 27
+  },
+  {
+    "name": "Chia Seeds",
+    "category": "seeds",
+    "calories": 486,
+    "protein": 17,
+    "carbs": 42,
+    "fat": 31,
+    "fiber": 34
+  },
+  {
+    "name": "Pumpkin Seeds",
+    "category": "seeds",
+    "calories": 559,
+    "protein": 30,
+    "carbs": 11,
+    "fat": 49,
+    "fiber": 6
+  },
+  {
+    "name": "Sunflower Seeds",
+    "category": "seeds",
+    "calories": 584,
+    "protein": 21,
+    "carbs": 20,
+    "fat": 51,
+    "fiber": 9
+  },
+
+  {
+    "name": "Cashews",
+    "category": "nuts",
+    "calories": 553,
+    "protein": 18,
+    "carbs": 30,
+    "fat": 44,
+    "fiber": 3
+  },
+  {
+    "name": "Pecans",
+    "category": "nuts",
+    "calories": 691,
+    "protein": 9,
+    "carbs": 14,
+    "fat": 72,
+    "fiber": 10
+  },
+
+  {
+    "name": "Raspberries",
+    "category": "fruit",
+    "calories": 52,
+    "protein": 1,
+    "carbs": 12,
+    "fat": 0,
+    "fiber": 6
+  },
+  {
+    "name": "Blackberries",
+    "category": "fruit",
+    "calories": 43,
+    "protein": 1,
+    "carbs": 10,
+    "fat": 0,
+    "fiber": 5
+  },
+  {
+    "name": "Mango",
+    "category": "fruit",
+    "calories": 60,
+    "protein": 1,
+    "carbs": 15,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Kiwi",
+    "category": "fruit",
+    "calories": 61,
+    "protein": 1,
+    "carbs": 15,
+    "fat": 1,
+    "fiber": 3
+  },
+  {
+    "name": "Peach",
+    "category": "fruit",
+    "calories": 39,
+    "protein": 1,
+    "carbs": 10,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Pear",
+    "category": "fruit",
+    "calories": 57,
+    "protein": 0,
+    "carbs": 15,
+    "fat": 0,
+    "fiber": 3
+  },
+
+  {
+    "name": "Cantaloupe",
+    "category": "fruit",
+    "calories": 34,
+    "protein": 1,
+    "carbs": 8,
+    "fat": 0,
+    "fiber": 1
+  },
+  {
+    "name": "Honeydew",
+    "category": "fruit",
+    "calories": 36,
+    "protein": 1,
+    "carbs": 9,
+    "fat": 0,
+    "fiber": 1
+  },
+  {
+    "name": "Watermelon",
+    "category": "fruit",
+    "calories": 30,
+    "protein": 1,
+    "carbs": 8,
+    "fat": 0,
+    "fiber": 0
+  },
+
+  {
+    "name": "Basmati Rice (cooked)",
+    "category": "grain",
+    "calories": 121,
+    "protein": 3,
+    "carbs": 26,
+    "fat": 0,
+    "fiber": 0
+  },
+  {
+    "name": "Jasmine Rice (cooked)",
+    "category": "grain",
+    "calories": 129,
+    "protein": 2,
+    "carbs": 28,
+    "fat": 0,
+    "fiber": 0
+  },
+  {
+    "name": "Barley (cooked)",
+    "category": "grain",
+    "calories": 123,
+    "protein": 2,
+    "carbs": 28,
+    "fat": 0,
+    "fiber": 3
+  },
+
+  {
+    "name": "White Bread",
+    "category": "grain",
+    "calories": 266,
+    "protein": 9,
+    "carbs": 49,
+    "fat": 3,
+    "fiber": 3
+  },
+  {
+    "name": "Bagel (plain)",
+    "category": "grain",
+    "calories": 250,
+    "protein": 10,
+    "carbs": 48,
+    "fat": 1,
+    "fiber": 2
+  },
+  {
+    "name": "Corn Tortilla",
+    "category": "grain",
+    "calories": 218,
+    "protein": 5,
+    "carbs": 46,
+    "fat": 2,
+    "fiber": 6
+  },
+  {
+    "name": "Flour Tortilla",
+    "category": "grain",
+    "calories": 297,
+    "protein": 8,
+    "carbs": 49,
+    "fat": 7,
+    "fiber": 3
+  },
+
+  {
+    "name": "Granola",
+    "category": "grain",
+    "calories": 489,
+    "protein": 10,
+    "carbs": 64,
+    "fat": 20,
+    "fiber": 7
+  },
+  {
+    "name": "Cereal (corn flakes)",
+    "category": "grain",
+    "calories": 357,
+    "protein": 8,
+    "carbs": 84,
+    "fat": 0,
+    "fiber": 3
+  },
+
+  {
+    "name": "Protein Bar (generic)",
+    "category": "snack",
+    "calories": 220,
+    "protein": 20,
+    "carbs": 23,
+    "fat": 7,
+    "fiber": 3
+  },
+  {
+    "name": "Trail Mix",
+    "category": "snack",
+    "calories": 607,
+    "protein": 20,
+    "carbs": 49,
+    "fat": 40,
+    "fiber": 7
+  },
+  {
+    "name": "Popcorn (air-popped)",
+    "category": "snack",
+    "calories": 387,
+    "protein": 13,
+    "carbs": 78,
+    "fat": 4,
+    "fiber": 15
+  },
+
+  {
+    "name": "Turkey Sandwich (simple)",
+    "category": "prepared",
+    "calories": 290,
+    "protein": 20,
+    "carbs": 28,
+    "fat": 10,
+    "fiber": 3
+  },
+  {
+    "name": "Ham Sandwich",
+    "category": "prepared",
+    "calories": 310,
+    "protein": 19,
+    "carbs": 30,
+    "fat": 12,
+    "fiber": 2
+  },
+  {
+    "name": "Chicken Caesar Salad",
+    "category": "prepared",
+    "calories": 330,
+    "protein": 26,
+    "carbs": 10,
+    "fat": 20,
+    "fiber": 3
+  },
+  {
+    "name": "Greek Salad",
+    "category": "prepared",
+    "calories": 150,
+    "protein": 4,
+    "carbs": 7,
+    "fat": 12,
+    "fiber": 2
+  },
+  {
+    "name": "Buffalo Chicken Wrap",
+    "category": "prepared",
+    "calories": 420,
+    "protein": 32,
+    "carbs": 35,
+    "fat": 18,
+    "fiber": 3
+  },
+  {
+    "name": "Chicken Burrito (simple)",
+    "category": "prepared",
+    "calories": 480,
+    "protein": 28,
+    "carbs": 50,
+    "fat": 16,
+    "fiber": 5
+  },
+  {
+    "name": "Beef Burrito",
+    "category": "prepared",
+    "calories": 520,
+    "protein": 29,
+    "carbs": 47,
+    "fat": 22,
+    "fiber": 6
+  },
+  {
+    "name": "Tuna Salad",
+    "category": "prepared",
+    "calories": 200,
+    "protein": 18,
+    "carbs": 3,
+    "fat": 13,
+    "fiber": 0
+  },
+  {
+    "name": "Egg Salad",
+    "category": "prepared",
+    "calories": 230,
+    "protein": 10,
+    "carbs": 2,
+    "fat": 20,
+    "fiber": 0
+  },
+
+  {
+    "name": "Pasta with Marinara",
+    "category": "prepared",
+    "calories": 220,
+    "protein": 8,
+    "carbs": 40,
+    "fat": 3,
+    "fiber": 4
+  },
+  {
+    "name": "Pasta with Alfredo",
+    "category": "prepared",
+    "calories": 410,
+    "protein": 10,
+    "carbs": 35,
+    "fat": 24,
+    "fiber": 2
+  },
+  {
+    "name": "Mac and Cheese",
+    "category": "prepared",
+    "calories": 310,
+    "protein": 12,
+    "carbs": 33,
+    "fat": 15,
+    "fiber": 1
+  },
+
+  {
+    "name": "Cheeseburger",
+    "category": "prepared",
+    "calories": 303,
+    "protein": 17,
+    "carbs": 30,
+    "fat": 13,
+    "fiber": 2
+  },
+  {
+    "name": "Hamburger",
+    "category": "prepared",
+    "calories": 254,
+    "protein": 13,
+    "carbs": 29,
+    "fat": 10,
+    "fiber": 1
+  },
+  {
+    "name": "Veggie Burger",
+    "category": "prepared",
+    "calories": 124,
+    "protein": 11,
+    "carbs": 10,
+    "fat": 4,
+    "fiber": 4
+  },
+  {
+    "name": "Hot Dog",
+    "category": "prepared",
+    "calories": 151,
+    "protein": 5,
+    "carbs": 2,
+    "fat": 13,
+    "fiber": 0
+  },
+  {
+    "name": "Pizza (cheese slice)",
+    "category": "prepared",
+    "calories": 266,
+    "protein": 11,
+    "carbs": 33,
+    "fat": 10,
+    "fiber": 2
+  },
+  {
+    "name": "Chicken Alfredo Pizza",
+    "category": "prepared",
+    "calories": 305,
+    "protein": 12,
+    "carbs": 29,
+    "fat": 15,
+    "fiber": 1
+  },
+
+  {
+    "name": "Sushi (California Roll)",
+    "category": "prepared",
+    "calories": 255,
+    "protein": 9,
+    "carbs": 38,
+    "fat": 7,
+    "fiber": 2
+  },
+  {
+    "name": "Sushi (Salmon Roll)",
+    "category": "prepared",
+    "calories": 231,
+    "protein": 13,
+    "carbs": 30,
+    "fat": 7,
+    "fiber": 1
+  },
+  {
+    "name": "Sushi (Tuna Roll)",
+    "category": "prepared",
+    "calories": 184,
+    "protein": 14,
+    "carbs": 24,
+    "fat": 2,
+    "fiber": 1
+  },
+
+  {
+    "name": "Chicken Stir Fry",
+    "category": "prepared",
+    "calories": 240,
+    "protein": 20,
+    "carbs": 20,
+    "fat": 10,
+    "fiber": 3
+  },
+  {
+    "name": "Veggie Stir Fry",
+    "category": "prepared",
+    "calories": 180,
+    "protein": 8,
+    "carbs": 22,
+    "fat": 7,
+    "fiber": 4
+  },
+  {
+    "name": "Beef Stir Fry",
+    "category": "prepared",
+    "calories": 275,
+    "protein": 24,
+    "carbs": 18,
+    "fat": 11,
+    "fiber": 2
+  },
+
+  {
+    "name": "Grilled Chicken Sandwich",
+    "category": "prepared",
+    "calories": 320,
+    "protein": 26,
+    "carbs": 35,
+    "fat": 9,
+    "fiber": 2
+  },
+  {
+    "name": "Pulled Pork Sandwich",
+    "category": "prepared",
+    "calories": 370,
+    "protein": 22,
+    "carbs": 34,
+    "fat": 15,
+    "fiber": 2
+  },
+  {
+    "name": "BLT Sandwich",
+    "category": "prepared",
+    "calories": 360,
+    "protein": 13,
+    "carbs": 28,
+    "fat": 22,
+    "fiber": 2
+  },
+
+  {
+    "name": "Protein Shake (whey)",
+    "category": "shake",
+    "calories": 140,
+    "protein": 24,
+    "carbs": 5,
+    "fat": 2,
+    "fiber": 1
+  },
+  {
+    "name": "Protein Shake (plant)",
+    "category": "shake",
+    "calories": 170,
+    "protein": 20,
+    "carbs": 8,
+    "fat": 5,
+    "fiber": 3
+  },
+  {
+    "name": "Chocolate Milkshake",
+    "category": "shake",
+    "calories": 355,
+    "protein": 12,
+    "carbs": 55,
+    "fat": 11,
+    "fiber": 1
+  },
+
+  {
+    "name": "Chicken Noodle Soup",
+    "category": "soup",
+    "calories": 61,
+    "protein": 5,
+    "carbs": 7,
+    "fat": 2,
+    "fiber": 0
+  },
+  {
+    "name": "Tomato Soup",
+    "category": "soup",
+    "calories": 74,
+    "protein": 2,
+    "carbs": 13,
+    "fat": 2,
+    "fiber": 1
+  },
+  {
+    "name": "Minestrone",
+    "category": "soup",
+    "calories": 83,
+    "protein": 3,
+    "carbs": 14,
+    "fat": 2,
+    "fiber": 3
+  },
+  {
+    "name": "Beef Stew",
+    "category": "soup",
+    "calories": 143,
+    "protein": 10,
+    "carbs": 10,
+    "fat": 6,
+    "fiber": 1
+  },
+
+  {
+    "name": "Oatmeal (cooked)",
+    "category": "breakfast",
+    "calories": 158,
+    "protein": 6,
+    "carbs": 27,
+    "fat": 3,
+    "fiber": 4
+  },
+  {
+    "name": "Pancakes",
+    "category": "breakfast",
+    "calories": 227,
+    "protein": 6,
+    "carbs": 28,
+    "fat": 10,
+    "fiber": 1
+  },
+  {
+    "name": "Waffles",
+    "category": "breakfast",
+    "calories": 291,
+    "protein": 6,
+    "carbs": 32,
+    "fat": 15,
+    "fiber": 1
+  },
+  {
+    "name": "Scrambled Eggs",
+    "category": "breakfast",
+    "calories": 148,
+    "protein": 10,
+    "carbs": 2,
+    "fat": 11,
+    "fiber": 0
+  },
+  {
+    "name": "Avocado Toast",
+    "category": "breakfast",
+    "calories": 250,
+    "protein": 6,
+    "carbs": 24,
+    "fat": 14,
+    "fiber": 5
+  },
+
+  {
+    "name": "Bagel with Cream Cheese",
+    "category": "breakfast",
+    "calories": 380,
+    "protein": 12,
+    "carbs": 55,
+    "fat": 12,
+    "fiber": 2
+  },
+  {
+    "name": "Granola Bar",
+    "category": "snack",
+    "calories": 132,
+    "protein": 2,
+    "carbs": 17,
+    "fat": 6,
+    "fiber": 1
+  },
+  {
+    "name": "Yogurt Parfait",
+    "category": "breakfast",
+    "calories": 160,
+    "protein": 8,
+    "carbs": 24,
+    "fat": 4,
+    "fiber": 2
+  },
+
+  {
+    "name": "Smoothie (berry)",
+    "category": "drink",
+    "calories": 190,
+    "protein": 3,
+    "carbs": 40,
+    "fat": 1,
+    "fiber": 4
+  },
+  {
+    "name": "Smoothie (green)",
+    "category": "drink",
+    "calories": 150,
+    "protein": 3,
+    "carbs": 30,
+    "fat": 1,
+    "fiber": 3
+  },
+  {
+    "name": "Orange Juice",
+    "category": "drink",
+    "calories": 45,
+    "protein": 1,
+    "carbs": 10,
+    "fat": 0,
+    "fiber": 0
+  },
+  {
+    "name": "Apple Juice",
+    "category": "drink",
+    "calories": 46,
+    "protein": 0,
+    "carbs": 12,
+    "fat": 0,
+    "fiber": 0
+  },
+
+  {
+    "name": "Chicken Curry",
+    "category": "prepared",
+    "calories": 240,
+    "protein": 20,
+    "carbs": 8,
+    "fat": 15,
+    "fiber": 2
+  },
+  {
+    "name": "Beef Curry",
+    "category": "prepared",
+    "calories": 260,
+    "protein": 18,
+    "carbs": 9,
+    "fat": 17,
+    "fiber": 2
+  },
+  {
+    "name": "Vegetable Curry",
+    "category": "prepared",
+    "calories": 180,
+    "protein": 5,
+    "carbs": 20,
+    "fat": 8,
+    "fiber": 4
+  },
+
+  {
+    "name": "Chicken Tacos",
+    "category": "prepared",
+    "calories": 300,
+    "protein": 22,
+    "carbs": 28,
+    "fat": 12,
+    "fiber": 3
+  },
+  {
+    "name": "Beef Tacos",
+    "category": "prepared",
+    "calories": 320,
+    "protein": 18,
+    "carbs": 27,
+    "fat": 17,
+    "fiber": 3
+  },
+  {
+    "name": "Veggie Tacos",
+    "category": "prepared",
+    "calories": 210,
+    "protein": 8,
+    "carbs": 24,
+    "fat": 9,
+    "fiber": 4
+  },
+
+  {
+    "name": "Chicken Quesadilla",
+    "category": "prepared",
+    "calories": 330,
+    "protein": 22,
+    "carbs": 24,
+    "fat": 15,
+    "fiber": 2
+  },
+  {
+    "name": "Cheese Quesadilla",
+    "category": "prepared",
+    "calories": 310,
+    "protein": 15,
+    "carbs": 25,
+    "fat": 16,
+    "fiber": 2
+  },
+  {
+    "name": "Beef Enchiladas",
+    "category": "prepared",
+    "calories": 340,
+    "protein": 20,
+    "carbs": 30,
+    "fat": 15,
+    "fiber": 3
+  },
+
+  {
+    "name": "Chicken Fried Rice",
+    "category": "prepared",
+    "calories": 333,
+    "protein": 14,
+    "carbs": 44,
+    "fat": 11,
+    "fiber": 2
+  },
+  {
+    "name": "Veggie Fried Rice",
+    "category": "prepared",
+    "calories": 290,
+    "protein": 8,
+    "carbs": 45,
+    "fat": 7,
+    "fiber": 3
+  },
+  {
+    "name": "Beef Fried Rice",
+    "category": "prepared",
+    "calories": 355,
+    "protein": 16,
+    "carbs": 43,
+    "fat": 13,
+    "fiber": 2
+  },
+
+  {
+    "name": "Chicken Pad Thai",
+    "category": "prepared",
+    "calories": 357,
+    "protein": 21,
+    "carbs": 46,
+    "fat": 11,
+    "fiber": 3
+  },
+  {
+    "name": "Shrimp Pad Thai",
+    "category": "prepared",
+    "calories": 320,
+    "protein": 20,
+    "carbs": 45,
+    "fat": 8,
+    "fiber": 3
+  },
+
+  {
+    "name": "Chicken Shawarma",
+    "category": "prepared",
+    "calories": 350,
+    "protein": 26,
+    "carbs": 32,
+    "fat": 14,
+    "fiber": 3
+  },
+  {
+    "name": "Beef Shawarma",
+    "category": "prepared",
+    "calories": 390,
+    "protein": 23,
+    "carbs": 34,
+    "fat": 18,
+    "fiber": 3
+  },
+  {
+    "name": "Falafel Wrap",
+    "category": "prepared",
+    "calories": 330,
+    "protein": 10,
+    "carbs": 37,
+    "fat": 14,
+    "fiber": 6
+  },
+
+  {
+    "name": "Chicken Gyro",
+    "category": "prepared",
+    "calories": 398,
+    "protein": 28,
+    "carbs": 39,
+    "fat": 14,
+    "fiber": 3
+  },
+  {
+    "name": "Lamb Gyro",
+    "category": "prepared",
+    "calories": 445,
+    "protein": 25,
+    "carbs": 39,
+    "fat": 23,
+    "fiber": 3
+  },
+
+  {
+    "name": "Pita Bread",
+    "category": "grain",
+    "calories": 275,
+    "protein": 9,
+    "carbs": 55,
+    "fat": 1,
+    "fiber": 2
+  },
+  {
+    "name": "Naan Bread",
+    "category": "grain",
+    "calories": 310,
+    "protein": 10,
+    "carbs": 50,
+    "fat": 8,
+    "fiber": 2
+  },
+
+  {
+    "name": "Baked Beans",
+    "category": "legume",
+    "calories": 94,
+    "protein": 5,
+    "carbs": 21,
+    "fat": 0,
+    "fiber": 5
+  },
+  {
+    "name": "Refried Beans",
+    "category": "legume",
+    "calories": 108,
+    "protein": 7,
+    "carbs": 15,
+    "fat": 3,
+    "fiber": 5
+  },
+
+  {
+    "name": "Rotisserie Chicken (mixed)",
+    "category": "protein",
+    "calories": 219,
+    "protein": 24,
+    "carbs": 0,
+    "fat": 13,
+    "fiber": 0
+  },
+  {
+    "name": "Turkey Breast (roasted)",
+    "category": "protein",
+    "calories": 135,
+    "protein": 29,
+    "carbs": 0,
+    "fat": 1,
+    "fiber": 0
+  },
+  {
+    "name": "Duck Breast (roasted)",
+    "category": "protein",
+    "calories": 337,
+    "protein": 19,
+    "carbs": 0,
+    "fat": 28,
+    "fiber": 0
+  },
+
+  {
+    "name": "Salmon Sushi Bowl",
+    "category": "prepared",
+    "calories": 390,
+    "protein": 26,
+    "carbs": 42,
+    "fat": 12,
+    "fiber": 3
+  },
+  {
+    "name": "Poke Bowl (tuna)",
+    "category": "prepared",
+    "calories": 430,
+    "protein": 30,
+    "carbs": 48,
+    "fat": 10,
+    "fiber": 4
+  },
+  {
+    "name": "Chicken Teriyaki Bowl",
+    "category": "prepared",
+    "calories": 475,
+    "protein": 32,
+    "carbs": 55,
+    "fat": 12,
+    "fiber": 3
+  },
+
+  {
+    "name": "Steak Bowl",
+    "category": "prepared",
+    "calories": 520,
+    "protein": 32,
+    "carbs": 48,
+    "fat": 20,
+    "fiber": 4
+  },
+  {
+    "name": "Veggie Bowl",
+    "category": "prepared",
+    "calories": 310,
+    "protein": 12,
+    "carbs": 45,
+    "fat": 8,
+    "fiber": 6
+  },
+
+  {
+    "name": "BBQ Chicken",
+    "category": "protein",
+    "calories": 209,
+    "protein": 26,
+    "carbs": 5,
+    "fat": 7,
+    "fiber": 0
+  },
+  {
+    "name": "BBQ Ribs",
+    "category": "protein",
+    "calories": 320,
+    "protein": 18,
+    "carbs": 8,
+    "fat": 24,
+    "fiber": 0
+  },
+  {
+    "name": "Pulled BBQ Pork",
+    "category": "protein",
+    "calories": 270,
+    "protein": 20,
+    "carbs": 10,
+    "fat": 15,
+    "fiber": 0
+  },
+
+  {
+    "name": "Mashed Potatoes",
+    "category": "side",
+    "calories": 88,
+    "protein": 2,
+    "carbs": 19,
+    "fat": 1,
+    "fiber": 2
+  },
+  {
+    "name": "French Fries",
+    "category": "side",
+    "calories": 312,
+    "protein": 3,
+    "carbs": 41,
+    "fat": 15,
+    "fiber": 4
+  },
+  {
+    "name": "Sweet Potato Fries",
+    "category": "side",
+    "calories": 296,
+    "protein": 2,
+    "carbs": 43,
+    "fat": 14,
+    "fiber": 5
+  },
+  {
+    "name": "Onion Rings",
+    "category": "side",
+    "calories": 411,
+    "protein": 4,
+    "carbs": 46,
+    "fat": 25,
+    "fiber": 3
+  },
+
+  {
+    "name": "Coleslaw",
+    "category": "side",
+    "calories": 152,
+    "protein": 1,
+    "carbs": 10,
+    "fat": 12,
+    "fiber": 2
+  },
+  {
+    "name": "Potato Salad",
+    "category": "side",
+    "calories": 143,
+    "protein": 2,
+    "carbs": 16,
+    "fat": 8,
+    "fiber": 1
+  },
+  {
+    "name": "Pasta Salad",
+    "category": "side",
+    "calories": 190,
+    "protein": 5,
+    "carbs": 25,
+    "fat": 7,
+    "fiber": 2
+  },
+
+  {
+    "name": "Grilled Vegetables",
+    "category": "side",
+    "calories": 80,
+    "protein": 3,
+    "carbs": 10,
+    "fat": 3,
+    "fiber": 3
+  },
+
+  {
+    "name": "Rice Pilaf",
+    "category": "grain",
+    "calories": 192,
+    "protein": 3,
+    "carbs": 30,
+    "fat": 6,
+    "fiber": 1
+  },
+  {
+    "name": "Wild Rice (cooked)",
+    "category": "grain",
+    "calories": 101,
+    "protein": 4,
+    "carbs": 21,
+    "fat": 0,
+    "fiber": 2
+  },
+
+  {
+    "name": "Baked Salmon",
+    "category": "protein",
+    "calories": 208,
+    "protein": 22,
+    "carbs": 0,
+    "fat": 13,
+    "fiber": 0
+  },
+  {
+    "name": "Seared Scallops",
+    "category": "protein",
+    "calories": 137,
+    "protein": 24,
+    "carbs": 5,
+    "fat": 2,
+    "fiber": 0
+  },
+  {
+    "name": "Grilled Shrimp Skewers",
+    "category": "protein",
+    "calories": 140,
+    "protein": 24,
+    "carbs": 2,
+    "fat": 3,
+    "fiber": 0
+  },
+
+  {
+    "name": "Baguette",
+    "category": "grain",
+    "calories": 270,
+    "protein": 9,
+    "carbs": 57,
+    "fat": 1,
+    "fiber": 3
+  },
+  {
+    "name": "Sourdough Bread",
+    "category": "grain",
+    "calories": 289,
+    "protein": 9,
+    "carbs": 56,
+    "fat": 2,
+    "fiber": 2
+  },
+  {
+    "name": "Multigrain Bread",
+    "category": "grain",
+    "calories": 265,
+    "protein": 12,
+    "carbs": 42,
+    "fat": 4,
+    "fiber": 6
+  },
+
+  {
+    "name": "Pesto Pasta",
+    "category": "prepared",
+    "calories": 360,
+    "protein": 10,
+    "carbs": 40,
+    "fat": 20,
+    "fiber": 3
+  },
+  {
+    "name": "Bolognese Pasta",
+    "category": "prepared",
+    "calories": 440,
+    "protein": 22,
+    "carbs": 45,
+    "fat": 18,
+    "fiber": 4
+  },
+
+  {
+    "name": "Chicken Fajitas",
+    "category": "prepared",
+    "calories": 315,
+    "protein": 28,
+    "carbs": 20,
+    "fat": 12,
+    "fiber": 4
+  },
+  {
+    "name": "Steak Fajitas",
+    "category": "prepared",
+    "calories": 350,
+    "protein": 26,
+    "carbs": 21,
+    "fat": 15,
+    "fiber": 4
+  },
+  {
+    "name": "Veggie Fajitas",
+    "category": "prepared",
+    "calories": 260,
+    "protein": 9,
+    "carbs": 27,
+    "fat": 11,
+    "fiber": 5
+  },
+
+  {
+    "name": "Turkey Chili",
+    "category": "prepared",
+    "calories": 240,
+    "protein": 22,
+    "carbs": 18,
+    "fat": 7,
+    "fiber": 5
+  },
+  {
+    "name": "Beef Chili",
+    "category": "prepared",
+    "calories": 260,
+    "protein": 21,
+    "carbs": 15,
+    "fat": 12,
+    "fiber": 5
+  },
+  {
+    "name": "Veggie Chili",
+    "category": "prepared",
+    "calories": 210,
+    "protein": 10,
+    "carbs": 30,
+    "fat": 6,
+    "fiber": 8
+  },
+
+  {
+    "name": "Clam Chowder",
+    "category": "soup",
+    "calories": 174,
+    "protein": 6,
+    "carbs": 16,
+    "fat": 10,
+    "fiber": 1
+  },
+  {
+    "name": "Lentil Soup",
+    "category": "soup",
+    "calories": 186,
+    "protein": 11,
+    "carbs": 30,
+    "fat": 3,
+    "fiber": 7
+  },
+  {
+    "name": "Broccoli Cheddar Soup",
+    "category": "soup",
+    "calories": 268,
+    "protein": 9,
+    "carbs": 17,
+    "fat": 18,
+    "fiber": 3
+  },
+
+  {
+    "name": "Caesar Salad",
+    "category": "prepared",
+    "calories": 190,
+    "protein": 7,
+    "carbs": 8,
+    "fat": 14,
+    "fiber": 2
+  },
+  {
+    "name": "Garden Salad",
+    "category": "prepared",
+    "calories": 120,
+    "protein": 3,
+    "carbs": 10,
+    "fat": 8,
+    "fiber": 4
+  },
+  {
+    "name": "Cobb Salad",
+    "category": "prepared",
+    "calories": 290,
+    "protein": 18,
+    "carbs": 10,
+    "fat": 19,
+    "fiber": 3
+  },
+  {
+    "name": "Mediterranean Salad",
+    "category": "prepared",
+    "calories": 220,
+    "protein": 6,
+    "carbs": 15,
+    "fat": 15,
+    "fiber": 3
+  },
+
+  {
+    "name": "Roasted Brussels Sprouts",
+    "category": "vegetable",
+    "calories": 89,
+    "protein": 4,
+    "carbs": 12,
+    "fat": 4,
+    "fiber": 4
+  },
+  {
+    "name": "Green Beans (steamed)",
+    "category": "vegetable",
+    "calories": 31,
+    "protein": 2,
+    "carbs": 7,
+    "fat": 0,
+    "fiber": 3
+  },
+  {
+    "name": "Butternut Squash (roasted)",
+    "category": "vegetable",
+    "calories": 45,
+    "protein": 1,
+    "carbs": 12,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Eggplant (grilled)",
+    "category": "vegetable",
+    "calories": 35,
+    "protein": 1,
+    "carbs": 9,
+    "fat": 0,
+    "fiber": 3
+  },
+  {
+    "name": "Beets (boiled)",
+    "category": "vegetable",
+    "calories": 44,
+    "protein": 2,
+    "carbs": 10,
+    "fat": 0,
+    "fiber": 2
+  },
+
+  {
+    "name": "Cranberries",
+    "category": "fruit",
+    "calories": 46,
+    "protein": 0,
+    "carbs": 12,
+    "fat": 0,
+    "fiber": 4
+  },
+  {
+    "name": "Dried Cranberries",
+    "category": "fruit",
+    "calories": 325,
+    "protein": 0,
+    "carbs": 83,
+    "fat": 1,
+    "fiber": 5
+  },
+  {
+    "name": "Raisins",
+    "category": "fruit",
+    "calories": 299,
+    "protein": 3,
+    "carbs": 79,
+    "fat": 1,
+    "fiber": 4
+  },
+  {
+    "name": "Dates",
+    "category": "fruit",
+    "calories": 282,
+    "protein": 2,
+    "carbs": 75,
+    "fat": 0,
+    "fiber": 8
+  },
+  {
+    "name": "Prunes",
+    "category": "fruit",
+    "calories": 240,
+    "protein": 2,
+    "carbs": 64,
+    "fat": 0,
+    "fiber": 7
+  },
+
+  {
+    "name": "Chicken Tenders (fried)",
+    "category": "prepared",
+    "calories": 302,
+    "protein": 21,
+    "carbs": 18,
+    "fat": 16,
+    "fiber": 1
+  },
+  {
+    "name": "Chicken Wings (fried)",
+    "category": "prepared",
+    "calories": 290,
+    "protein": 17,
+    "carbs": 0,
+    "fat": 22,
+    "fiber": 0
+  },
+  {
+    "name": "Mozzarella Sticks",
+    "category": "snack",
+    "calories": 320,
+    "protein": 15,
+    "carbs": 22,
+    "fat": 18,
+    "fiber": 1
+  },
+  {
+    "name": "Nachos (cheese)",
+    "category": "snack",
+    "calories": 346,
+    "protein": 12,
+    "carbs": 31,
+    "fat": 20,
+    "fiber": 3
+  },
+  {
+    "name": "Guacamole",
+    "category": "spread",
+    "calories": 160,
+    "protein": 2,
+    "carbs": 9,
+    "fat": 14,
+    "fiber": 6
+  },
+
+  {
+    "name": "Chicken Soup (homestyle)",
+    "category": "soup",
+    "calories": 75,
+    "protein": 6,
+    "carbs": 7,
+    "fat": 3,
+    "fiber": 1
+  },
+  {
+    "name": "Pho (chicken)",
+    "category": "prepared",
+    "calories": 350,
+    "protein": 28,
+    "carbs": 45,
+    "fat": 7,
+    "fiber": 3
+  },
+  {
+    "name": "Pho (beef)",
+    "category": "prepared",
+    "calories": 380,
+    "protein": 26,
+    "carbs": 46,
+    "fat": 10,
+    "fiber": 2
+  },
+  {
+    "name": "Ramen (pork)",
+    "category": "prepared",
+    "calories": 500,
+    "protein": 25,
+    "carbs": 60,
+    "fat": 18,
+    "fiber": 3
+  },
+  {
+    "name": "Ramen (chicken)",
+    "category": "prepared",
+    "calories": 460,
+    "protein": 21,
+    "carbs": 58,
+    "fat": 16,
+    "fiber": 3
+  },
+
+  {
+    "name": "Burrito Bowl (chicken)",
+    "category": "prepared",
+    "calories": 420,
+    "protein": 30,
+    "carbs": 45,
+    "fat": 13,
+    "fiber": 7
+  },
+  {
+    "name": "Burrito Bowl (steak)",
+    "category": "prepared",
+    "calories": 470,
+    "protein": 32,
+    "carbs": 44,
+    "fat": 16,
+    "fiber": 6
+  },
+  {
+    "name": "Burrito Bowl (veggie)",
+    "category": "prepared",
+    "calories": 320,
+    "protein": 12,
+    "carbs": 48,
+    "fat": 8,
+    "fiber": 9
+  },
+
+  {
+    "name": "Couscous (cooked)",
+    "category": "grain",
+    "calories": 112,
+    "protein": 4,
+    "carbs": 23,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Polenta",
+    "category": "grain",
+    "calories": 70,
+    "protein": 2,
+    "carbs": 15,
+    "fat": 0,
+    "fiber": 1
+  },
+  {
+    "name": "Gnocchi",
+    "category": "grain",
+    "calories": 130,
+    "protein": 3,
+    "carbs": 29,
+    "fat": 0,
+    "fiber": 1
+  },
+  {
+    "name": "Ravioli (cheese)",
+    "category": "prepared",
+    "calories": 240,
+    "protein": 10,
+    "carbs": 32,
+    "fat": 8,
+    "fiber": 2
+  },
+
+  {
+    "name": "Shrimp Scampi",
+    "category": "prepared",
+    "calories": 295,
+    "protein": 24,
+    "carbs": 8,
+    "fat": 18,
+    "fiber": 0
+  },
+  {
+    "name": "Chicken Parmesan",
+    "category": "prepared",
+    "calories": 340,
+    "protein": 28,
+    "carbs": 16,
+    "fat": 18,
+    "fiber": 1
+  },
+  {
+    "name": "Eggplant Parmesan",
+    "category": "prepared",
+    "calories": 325,
+    "protein": 11,
+    "carbs": 30,
+    "fat": 18,
+    "fiber": 5
+  },
+
+  {
+    "name": "Mushroom Risotto",
+    "category": "prepared",
+    "calories": 280,
+    "protein": 7,
+    "carbs": 38,
+    "fat": 10,
+    "fiber": 2
+  },
+  {
+    "name": "Chicken Risotto",
+    "category": "prepared",
+    "calories": 330,
+    "protein": 18,
+    "carbs": 40,
+    "fat": 12,
+    "fiber": 2
+  },
+
+  {
+    "name": "Turkey Meatballs",
+    "category": "protein",
+    "calories": 230,
+    "protein": 18,
+    "carbs": 7,
+    "fat": 14,
+    "fiber": 1
+  },
+  {
+    "name": "Beef Meatballs",
+    "category": "protein",
+    "calories": 280,
+    "protein": 17,
+    "carbs": 8,
+    "fat": 18,
+    "fiber": 1
+  },
+  {
+    "name": "Veggie Meatballs",
+    "category": "protein",
+    "calories": 210,
+    "protein": 10,
+    "carbs": 12,
+    "fat": 13,
+    "fiber": 3
+  },
+
+  {
+    "name": "Turkey Sandwich (deli)",
+    "category": "prepared",
+    "calories": 280,
+    "protein": 20,
+    "carbs": 32,
+    "fat": 7,
+    "fiber": 3
+  },
+  {
+    "name": "Roast Beef Sandwich",
+    "category": "prepared",
+    "calories": 310,
+    "protein": 21,
+    "carbs": 29,
+    "fat": 11,
+    "fiber": 2
+  },
+  {
+    "name": "Veggie Sandwich",
+    "category": "prepared",
+    "calories": 240,
+    "protein": 8,
+    "carbs": 30,
+    "fat": 9,
+    "fiber": 5
+  },
+
+  {
+    "name": "Chicken Caesar Wrap",
+    "category": "prepared",
+    "calories": 360,
+    "protein": 26,
+    "carbs": 32,
+    "fat": 14,
+    "fiber": 3
+  },
+  {
+    "name": "Veggie Wrap",
+    "category": "prepared",
+    "calories": 260,
+    "protein": 7,
+    "carbs": 36,
+    "fat": 9,
+    "fiber": 5
+  },
+
+  {
+    "name": "Baked Potato",
+    "category": "vegetable",
+    "calories": 93,
+    "protein": 2,
+    "carbs": 21,
+    "fat": 0,
+    "fiber": 2
+  },
+  {
+    "name": "Hash Browns",
+    "category": "breakfast",
+    "calories": 326,
+    "protein": 4,
+    "carbs": 35,
+    "fat": 21,
+    "fiber": 3
+  },
+
+  {
+    "name": "Tortilla Chips",
+    "category": "snack",
+    "calories": 465,
+    "protein": 6,
+    "carbs": 67,
+    "fat": 19,
+    "fiber": 5
+  },
+  {
+    "name": "Pretzels",
+    "category": "snack",
+    "calories": 380,
+    "protein": 10,
+    "carbs": 80,
+    "fat": 2,
+    "fiber": 3
+  },
+  {
+    "name": "Crackers (plain)",
+    "category": "snack",
+    "calories": 430,
+    "protein": 7,
+    "carbs": 72,
+    "fat": 12,
+    "fiber": 3
+  },
+
+  {
+    "name": "Chocolate Bar",
+    "category": "snack",
+    "calories": 546,
+    "protein": 4,
+    "carbs": 61,
+    "fat": 31,
+    "fiber": 3
+  },
+  {
+    "name": "Ice Cream (vanilla)",
+    "category": "dessert",
+    "calories": 207,
+    "protein": 4,
+    "carbs": 24,
+    "fat": 11,
+    "fiber": 0
+  },
+  {
+    "name": "Brownie",
+    "category": "dessert",
+    "calories": 466,
+    "protein": 6,
+    "carbs": 51,
+    "fat": 25,
+    "fiber": 3
+  },
+  {
+    "name": "Chocolate Chip Cookie",
+    "category": "dessert",
+    "calories": 488,
+    "protein": 5,
+    "carbs": 64,
+    "fat": 24,
+    "fiber": 3
+  }
+]
